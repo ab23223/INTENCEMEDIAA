@@ -8,10 +8,6 @@ def server_static(filepath):
 
 @route('/')
 def index():
-     return template('homepage')
-
-@route('/index')
-def index():
      return template('index')
 
 #main
