@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INTENCE MEDIA - Photography Portfolio</title>
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+    <header>
+        <img src="/static/INTEC MEDIA1.png" alt="INTENCE MEDIA Logo">
+        <nav>
+            <ul>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <h2> Quality Photography Exceptional Service</h2>
+    </section>
+    
+    <section id="info-section">
+        <div class="info-text">
+            <h2>ATTENTION TO DETAIL</h2>
+            <p>Every shot is captured with precision, focusing on the smallest details to bring out the best in every photo. Whether it's a car’s reflections, a portrait’s expression, or the atmosphere of an event, I make sure every image tells a story with clarity and style.</p>
+        </div>
+        <div class="info-image">
+            <img src="/static/GM SHOW (3).JPG" alt="Photography in action">
+        </div>
+    </section>
+
+
+
+    <section id="photo-slider">
+        <h2>SHOWCASE</h2>
+        <div class="slider-container">
+            <button class="arrow prev">&#10094;</button>
+            <div class="slider-wrapper">
+                <div class="slider">
+                    <img src="/static/VK side dark.JPG" alt="Photo 1">
+                    <img src="/static/Audi (2).JPG" alt="Photo 2">
+                    <img src="https://i0.wp.com/www.streetmachine.com.au/wp-content/uploads/2025/01/summernats-37-unveils-2025-8.jpg?strip=info&w=2000&ssl=1" alt="Photo 3">
+                    <img src="/static/NSX (2).JPG" alt="Photo 4">
+                    <img src="/static/VK (21).JPG" alt="Photo 5">
+                    <img src="https://i0.wp.com/www.streetmachine.com.au/wp-content/uploads/2025/01/troy-candy-vf-hsv-summernats-4.jpg?strip=info&w=2000&ssl=1" alt="Photo 6">
+                    <img src="https://www.streetmachine.com.au/wp-content/uploads/2024/01/summernats-top-20-6-1-2048x1365.jpg" alt="Photo 7">
+                    <img src="/static/VK side dark.JPG" alt="Photo 8">
+                </div>
+            </div>
+            <button class="arrow next">&#10095;</button>
+        </div>
+    </section>
+    
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <p>Hey, I’m Ashton, a 15-year-old photographer who’s always looking for the next great shot. Whether it’s cars, people, or anything that catches my eye, I focus on capturing real moments with the best detail possible. Photography is more than just a hobby for me—it’s something I’m constantly learning and improving on, one shot at a time.</p>
+    </section>
+    
+    <section id="extra-images">
+        <h2>Photo Previews</h2>
+        <div class="extra-images">
+            <img src="https://www.streetmachine.com.au/wp-content/uploads/2023/07/summernats-34-elite-hall-highlights-main-2048x1115.jpg" alt="Extra Image 1">
+            <img src="/static/GM SHOW (3).JPG" alt="Extra Image 2">
+            <img src="/static/NSX (2).JPG" alt="Extra Image 3">
+        </div>
+    </section>
+    
+    <section id="about">
+        <h2>About INTENCE MEDIA</h2>
+        <p>INTENCE MEDIA. Photography is my passion, and I specialize in capturing the beauty of cars, as well as the moments that matter in life. Whether it’s a classic car in motion, special event or even a photoshoot, I focus on making sure each shot is real and captures the perfect vibe. I keep things simple, and I'm here to help you relive those moments, whether they’re on the road or off.</p>
+    </section>
+    
+    <section id="contact">
+        <div class="contact-container">
+            <div class="contact-left">
+                <h2>CONTACT US</h2>
+                <p>Have a question or want to book a shoot? Reach out and let’s talk!</p>
+            </div>
+            <div class="contact-right">
+                <form action="https://formspree.io/f/mvgzryqz" method="POST">
+                    <label>
+                        <input type="text" name="name" placeholder="Your Name" required>
+                    </label>
+                    <label>
+                        <input type="email" name="email" placeholder="Your Email" required>
+                    </label>
+                    <label>
+                        <input type="tel" name="contact" placeholder="Contact No">
+                    </label>
+                    <label>
+                        <textarea name="message" placeholder="Your Message" required></textarea>
+                    </label>
+                    <div class="form-buttons">
+                        <button type="reset" class="cancel">Cancel</button>
+                        <button type="submit" class="send">Send</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+    <script>
+        let index = 0;
+        const slider = document.querySelector(".slider");
+        const images = document.querySelectorAll(".slider img");
+        const totalImages = images.length;
+        const gap = 20;  // The gap between images
+        
+        // Function to move the slider
+        function moveSlider(direction) {
+            const imageWidth = images[0].clientWidth;  // Get the width of a single image
+            
+            // Adjust index based on direction
+            index = (index + direction + totalImages) % totalImages;
+            
+            // Move the slider by the width of one image plus the gap
+            slider.style.transition = "transform 0.5s ease-in-out";
+            slider.style.transform = `translateX(-${(imageWidth + gap) * index}px)`;  // Calculate the movement with the gap
+        }
+
+        // Event listeners for the arrows
+        document.querySelector('.prev').addEventListener('click', () => {
+            moveSlider(-1); // Move to the previous image
+        });
+
+        document.querySelector('.next').addEventListener('click', () => {
+            moveSlider(1); // Move to the next image
+        });
+    </script>
+</body>
+</html>
