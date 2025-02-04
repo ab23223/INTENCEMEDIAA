@@ -55,7 +55,7 @@ nav ul li a {
 }
 
 .hero {
-    background: url('/static/vk side dark.JPG') center/cover no-repeat;
+    background: url('https://res.cloudinary.com/dfqreujbo/image/upload/v1738712765/VK_17_w5jstn.jpg') center/cover no-repeat;
     height: 900px;
     display: flex;
     align-items: center;
