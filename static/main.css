@@ -148,18 +148,49 @@ nav ul li a {
     font-size: 50px;
 }
 
+/* Album gallery styles */
+#album-gallery {
+    padding: 40px;
+    text-align: center;
+}
+
+#album-gallery h2 {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+/* Updated grid styling for album images */
+.album-images {
+    column-count: 3; /* Adjust the number of columns */
+    column-gap: 20px; /* Space between columns */
+    padding: 0 20px; /* Optional: Adds padding to the sides */
+}
+
+.album-images img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px; /* Adds spacing between images */
+    object-fit: cover; /* Ensures the image covers its area without stretching */
+    border-radius: 8px; /* Adds rounded corners to images */
+}
+
+/* Optional: Add a hover effect */
+.album-images img:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
 .extra-images {
     display: flex;
     justify-content: center;
     gap: 20px;
-    flex-wrap: wrap; /* Allow images to wrap to the next line */
+    flex-wrap: wrap;
 }
 
 .extra-images img {
-    width: auto;  /* Allow the image to scale based on its original aspect ratio */
-    height: 300px;  /* Set a consistent height for all images */
-    max-width: 100%;  /* Ensure the image doesn't overflow the container */
-    object-fit: contain;  /* Prevent cropping, keep image within bounds */
+    width: auto;
+    height: 300px;
+    max-width: 100%;
+    object-fit: contain;
     border-radius: 8px;
 }
 
