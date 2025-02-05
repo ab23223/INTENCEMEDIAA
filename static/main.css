@@ -174,11 +174,7 @@ nav ul li a {
     border-radius: 8px; /* Adds rounded corners to images */
 }
 
-/* Optional: Add a hover effect */
-.album-images img:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-}
+
 .extra-images {
     display: flex;
     justify-content: center;

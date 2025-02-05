@@ -158,6 +158,29 @@
             font-size: 50px;
         }
 
+
+
+        .album-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .album {
+            width: 300px; /* Adjust the width */
+            height: 300px; /* Adjust the height */
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .album img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures the images fill the box without stretching */
+        }
+
+
         .extra-images {
             display: flex;
             justify-content: center;
@@ -350,7 +373,9 @@
         }
     </style>
     <header>
-        <img src="/static/INTEC MEDIA1.png" alt="INTENCE MEDIA Logo">
+        <a href="https://scaling-sniffle-v6g7g44j5wpqfp65w-8080.app.github.dev/">
+            <img src="/static/INTEC MEDIA1.png" alt="INTENCE MEDIA Logo">
+        </a>
         <nav>
             <ul>
                 <li><a href="#portfolio">Portfolio</a></li>
@@ -417,25 +442,25 @@
     <section id="albums">
         <h2>Photo Albums</h2>
         <div class="album-container">
-            <!-- Car Album -->
+            <!-- GM Album -->
             <div class="album">
                 <a href="album_gmshow.html">
                     <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738712726/vk_side_dark_wjmie0.jpg" alt="Cars Album">
                     <p></p>
                 </a>
             </div>
-            <!-- Food Album -->
+            <!-- Car Album -->
             <div class="album">
                 <a href="album_car.html">
                     <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg" alt="Car Album">
                     <p></p>
                 </a>
             </div>
-            <!-- Travel Album -->
+            <!-- VK Album -->
             <div class="album">
-                <a href="album_travel.html">
-                    <img src="https://example.com/travel-album-thumbnail.jpg" alt="Travel Album">
-                    <p>Travel</p>
+                <a href="album_vk.html">
+                    <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737879/VK_24_kp4py3.jpg" alt="Travel Album">
+                    <p>VK</p>
                 </a>
             </div>
         </div>

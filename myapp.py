@@ -20,6 +20,10 @@ def album_gmshow():
 def album_car():
     return template('album_car.html')  # Make sure you have an 'album_gmshow.tpl' template in the 'views/' folder
 
+# Route for 'vk' album page
+@route('/album_vk.html')
+def album_vk():
+    return template('album_vk.html')  # Make sure you have an 'album_gmshow.tpl' template in the 'views/' folder
 
 
 # Run the app
