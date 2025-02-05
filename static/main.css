@@ -330,7 +330,7 @@ section p{
     align-items: center;
     justify-content: center;
     padding: 50px;
-    background-color: #fff; /* White background to keep it clean */
+    background-color: #fff;/* White background to keep it clean */
 }
 
 .info-text {
