@@ -376,6 +376,33 @@
             max-height: 600px;
             border-radius: 10px; /* Adds rounded corners for a softer look */
         }
+
+        #fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #fullscreen-modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        /* Add styles for the close button */
+        #fullscreen-modal span {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -397,28 +424,52 @@
         <h2>GM Show Album</h2>
         <div class="album-images">
             <!-- Add images for the car album -->
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719568/GM_SHOW_13_ftmwgs.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719630/GM_SHOW_49_lde1ge.jpg" alt="Car 2">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_28_qhftgm.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_16_gesayy.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719610/GM_SHOW_18_rgfgfg.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_43_dgwi4p.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_20_vam9uh.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_30_iooyn6.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719535/GM_SHOW_11_oo4vq6.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_2_ccwmgk.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_7_zkimlp.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_9_jswj4t.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_6_eeilcr.jpg" alt="Car 3">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_3_zyyukq.jpg" alt="Car 3">
-            <img src="" alt="Car 3">
-            <img src="" alt="Car 3">
-            <img src="" alt="Car 3">
-            <img src="" alt="Car 3">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719568/GM_SHOW_13_ftmwgs.jpg" alt="Car 1" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719630/GM_SHOW_49_lde1ge.jpg" alt="Car 2" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_28_qhftgm.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_16_gesayy.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719610/GM_SHOW_18_rgfgfg.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_43_dgwi4p.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_20_vam9uh.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_30_iooyn6.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719535/GM_SHOW_11_oo4vq6.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_2_ccwmgk.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_7_zkimlp.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_9_jswj4t.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_6_eeilcr.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_3_zyyukq.jpg" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="" alt="Car 3" onclick="openFullscreen(this)">
+        <img src="" alt="Car 3" onclick="openFullscreen(this)">
+
 
             <!-- Add more images as needed -->
         </div>
     </section>
+
+
+    <!-- Fullscreen Modal -->
+    <div id="fullscreen-modal">
+        <span onclick="closeFullscreen()">×</span>
+        <img id="fullscreen-image" src="" alt="Fullscreen image">
+    </div>
+
+    <script>
+        // Function to open the image in fullscreen mode
+        function openFullscreen(img) {
+            var modal = document.getElementById("fullscreen-modal");
+            var fullImg = document.getElementById("fullscreen-image");
+            modal.style.display = "flex";
+            fullImg.src = img.src;
+        }
+
+        // Function to close the fullscreen modal
+        function closeFullscreen() {
+            var modal = document.getElementById("fullscreen-modal");
+            modal.style.display = "none";
+        }
+    </script>
 </body>
 </html>
