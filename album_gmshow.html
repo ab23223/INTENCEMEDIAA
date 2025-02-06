@@ -487,18 +487,24 @@
             }
         }
         
-    
         document.addEventListener("DOMContentLoaded", function() {
-            const albumLink = document.querySelector("a[href='https://ab23223.github.io/INTENCMEDIA/#albums']");
-            
-            if (albumLink) {
-                albumLink.addEventListener("click", function(event) {
-                    event.preventDefault(); // Prevent default behavior
-                    window.location.href = "https://ab23223.github.io/INTENCMEDIA/albums.html"; // Redirect to Albums page
-                });
-            }
-        }
-    });
+            const links = {
+                "https://ab23223.github.io/INTENCMEDIA/#portfolio": "https://ab23223.github.io/INTENCMEDIA/portfolio.html",
+                "https://ab23223.github.io/INTENCMEDIA/#albums": "https://ab23223.github.io/INTENCMEDIA/albums.html",
+                "https://ab23223.github.io/INTENCMEDIA/#about": "https://ab23223.github.io/INTENCMEDIA/about.html",
+                "https://ab23223.github.io/INTENCMEDIA/#contact": "https://ab23223.github.io/INTENCMEDIA/contact.html"
+            };
+
+            document.querySelectorAll("nav ul li a").forEach(link => {
+                const url = link.getAttribute("href");
+                if (links[url]) {
+                    link.addEventListener("click", function(event) {
+                        event.preventDefault();
+                        window.location.href = links[url];
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
