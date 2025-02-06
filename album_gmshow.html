@@ -486,9 +486,19 @@
                 document.getElementById("fullscreen-image").src = images[currentIndex].src;
             }
         }
+        
+    
+        document.addEventListener("DOMContentLoaded", function() {
+            const albumLink = document.querySelector("a[href='https://ab23223.github.io/INTENCMEDIA/#albums']");
+            
+            if (albumLink) {
+                albumLink.addEventListener("click", function(event) {
+                    event.preventDefault(); // Prevent default behavior
+                    window.location.href = "https://ab23223.github.io/INTENCMEDIA/albums.html"; // Redirect to Albums page
+                });
+            }
+        }
     });
-
-
     </script>
 </body>
 </html>
