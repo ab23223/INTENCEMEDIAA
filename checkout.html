@@ -85,10 +85,10 @@
 
         <!-- Right side: package details -->
         <div class="details">
-            <h3>Package Name: Premium Package</h3>
-            <p><strong>Price:</strong> $200</p>
-            <p><strong>GST (10%):</strong> $20</p>
-            <p><strong>Total:</strong> $220</p>
+            <h3 id="packageName">Package Name: </h3>
+            <p><strong>Price:</strong> <span id="packagePrice">$0</span></p>
+            <p><strong>GST (10%):</strong> <span id="gst">$0</span></p>
+            <p><strong>Total:</strong> <span id="total">$0</span></p>
         </div>
     </div>
 
@@ -107,11 +107,32 @@
             checkoutGrid.appendChild(imgBox);
         });
 
+        // Get package info from localStorage
+        const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage')) || {
+            name: 'Basic Package',
+            price: 100
+        };
+
+        // Display the package details
+        const packageName = document.getElementById("packageName");
+        const packagePrice = document.getElementById("packagePrice");
+        const gst = document.getElementById("gst");
+        const total = document.getElementById("total");
+
+        const gstAmount = selectedPackage.price * 0.1; // GST is 10%
+        const totalAmount = selectedPackage.price + gstAmount;
+
+        packageName.textContent = `Package Name: ${selectedPackage.name}`;
+        packagePrice.textContent = `$${selectedPackage.price}`;
+        gst.textContent = `$${gstAmount.toFixed(2)}`;
+        total.textContent = `$${totalAmount.toFixed(2)}`;
+
         // Process payment (stub for now)
         function processPayment() {
             alert("Processing Payment...");
             // Integrate payment gateway here (e.g., Stripe, PayPal)
             localStorage.removeItem("selectedImages");
+            localStorage.removeItem("selectedPackage");
             window.location.href = "success.html"; // Redirect to success page
         }
     </script>
