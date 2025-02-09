@@ -30,5 +30,33 @@ def album_vk():
 def album():
     return template('albums.html')  # Make sure you have an 'album_gmshow.tpl' template in the 'views/' folder
 
+# Route for 'albums' album page
+@route('/buy.html')
+def buy():
+    return template('buy.html')  # Make sure you have an 'album_gmshow.tpl' template in the 'views/' folder
+
+# Route for 'albums' album page
+@route('/cart.html')
+def cart():
+    return template('cart.html')  # Make sure you have an 'album_gmshow.tpl' template in the 'views/' folder
+
+
+# Route for 'albums' album page
+@route('/checkout.html')
+def checkout():
+    return template('checkout.html')  # Make sure you have an 'album_gmshow.tpl' template in the 'views/' folder
+
+# Route for 'albums' album page
+@route('/success.html')
+def success():
+    return template('success.html')  # Make sure you have an 'album_gmshow.tpl' template in the 'views/' folder
+
+# Route for 'albums' album page
+@route('/select.html')
+def select():
+    return template('select.html')  # Make sure you have an 'album_gmshow.tpl' template in the 'views/' folder
+
+
+
 # Run the app
 run(reloader=True)

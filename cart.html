@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - INTENCE MEDIA</title>
+    <link rel="stylesheet" href="static/main.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738738526/INTEC_MEDIA1_famvag.png" alt="INTENCE MEDIA Logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="index.html#albums">Albums</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="buy.html">Buy More</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="cart">
+        <h2>Your Cart</h2>
+        <div id="cart-items"></div>
+        <h3>Total: $<span id="total-price">0</span></h3>
+        <button id="checkout">Checkout</button>
+        <button id="clear-cart">Clear Cart</button>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 INTENCE MEDIA. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            let cartItemsDiv = document.getElementById("cart-items");
+            let totalPrice = 0;
+
+            if (cart.length === 0) {
+                cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+            } else {
+                cart.forEach((item, index) => {
+                    let itemDiv = document.createElement("div");
+                    itemDiv.innerHTML = `${item.name} - $${item.price} <button onclick="removeFromCart(${index})">Remove</button>`;
+                    cartItemsDiv.appendChild(itemDiv);
+                    totalPrice += item.price;
+                });
+            }
+
+            document.getElementById("total-price").innerText = totalPrice;
+
+            document.getElementById("clear-cart").addEventListener("click", function () {
+                localStorage.removeItem("cart");
+                location.reload();
+            });
+
+            document.getElementById("checkout").addEventListener("click", function () {
+                if (cart.length > 0) {
+                    alert("Proceeding to checkout...");
+                } else {
+                    alert("Your cart is empty!");
+                }
+            });
+        });
+
+        function removeFromCart(index) {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            cart.splice(index, 1);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            location.reload();
+        }
+    </script>
+
+    <style>
+        .cart {
+            text-align: center;
+            padding: 50px;
+        }
+
+        button {
+            background-color: #ff007f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: #e6006f;
+        }
+    </style>
+
+</body>
+</html>

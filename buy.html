@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buy Images - INTENCE MEDIA</title>
+    <link rel="stylesheet" href="static/main.css">
+</head>
+<body>
+    <header>
+        <a href="index.html">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738738526/INTEC_MEDIA1_famvag.png" alt="INTENCE MEDIA Logo">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="index.html#albums">Albums</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="cart.html">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="pricing">
+        <h2>Select Your Package</h2>
+        <div class="pricing-grid">
+            <div class="pricing-box" data-limit="1" data-name="1 Image" data-price="5">
+                <h3>1 Image</h3>
+                <p>$5</p>
+                <button class="select-package">Select</button>
+            </div>
+            <div class="pricing-box" data-limit="5" data-name="5 Images" data-price="20">
+                <h3>5 Images</h3>
+                <p>$20</p>
+                <button class="select-package">Select</button>
+            </div>
+            <div class="pricing-box" data-limit="10" data-name="10 Images" data-price="40">
+                <h3>10 Images</h3>
+                <p>$40</p>
+                <button class="select-package">Select</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Image Selection Section -->
+    <section class="image-selection">
+        <h2>Select Your Images</h2>
+        <div class="image-grid" id="image-grid"></div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 INTENCE MEDIA. All rights reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            updateCartCount();
+
+            document.querySelectorAll(".select-package").forEach(button => {
+                button.addEventListener("click", function () {
+                    let box = this.parentElement;
+                    let limit = box.getAttribute("data-limit");
+                    window.location.href = `select.html?limit=${limit}`;
+                });
+            });
+
+            const images = [
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719568/GM_SHOW_13_ftmwgs.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719630/GM_SHOW_49_lde1ge.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_28_qhftgm.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_16_gesayy.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719610/GM_SHOW_18_rgfgfg.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_43_dgwi4p.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_20_vam9uh.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_30_iooyn6.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719535/GM_SHOW_11_oo4vq6.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_2_ccwmgk.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_7_zkimlp.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_9_jswj4t.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_6_eeilcr.jpg",
+                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_3_zyyukq.jpg"
+            ];
+
+            const imageGrid = document.getElementById("image-grid");
+            images.forEach((imageSrc) => {
+                let imgElement = document.createElement("img");
+                imgElement.src = imageSrc;
+                imgElement.classList.add("image-item");
+                imageGrid.appendChild(imgElement);
+            });
+        });
+
+        function updateCartCount() {
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
+            document.getElementById("cart-count").innerText = cart.length;
+        }
+    </script>
+
+    <style>
+        .pricing {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 200px;
+        }
+
+        .pricing-box button {
+            background-color: #ff007f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .pricing-box button:hover {
+            background-color: #e6006f;
+        }
+
+        .image-selection {
+            text-align: center;
+            padding: 50px;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .image-item {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</body>
+</html>
