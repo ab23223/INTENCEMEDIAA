@@ -6,49 +6,60 @@
     <title>Checkout</title>
     <style>
         body { font-family: Arial, sans-serif; display: flex; flex-direction: column; align-items: center; padding: 20px; }
+
         header {
             background: white;
+            color: white;
             padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 97%;
-            height: 100px;
+            height: 100px; /* Adjust the height as needed */
             position: relative;
         }
+
         header img {
             max-width: 200px;
-            margin-left: 20px;
+            margin-left: 20px; /* Moves the logo to the left */
         }
+
         nav {
             position: absolute;
-            top: 50%;
+            top: 50%; /* Moves the navigation to the middle */
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%); /* Centers it horizontally and vertically */
         }
+
         nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
+
         nav ul li {
             display: inline;
             margin: 0 20px;
         }
+
         nav ul li a {
             color: black;
             text-decoration: none;
-            font-size: 35px;
+            font-size: 35px; /* Keeps the font size large */
             font-weight: bold;
             font-family: 'Timmana';
         }
-        .checkout-container {
+
+
+        .checkout-container, #payment-form {
             width: 80%;
             max-width: 1200px;
             display: flex;
             gap: 20px;
             margin-bottom: 20px;
         }
+
+        /* Left side: image thumbnails */
         .image-grid {
             flex: 1;
             display: grid;
@@ -56,16 +67,20 @@
             gap: 10px;
             max-width: 50%;
         }
+
         .image-box {
             display: flex;
             justify-content: center;
         }
+
         .image-box img {
             width: 100%;
             height: auto;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        /* Right side: package details */
         .details {
             flex: 1;
             padding: 20px;
@@ -73,11 +88,35 @@
             border-radius: 8px;
             background-color: #f9f9f9;
         }
-        .details h3 { margin-bottom: 10px; }
-        .details p { margin: 5px 0; }
-        #confirm-button {
-            width: 80%;
-            max-width: 300px;
+
+        .details h3 {
+            margin-bottom: 10px;
+        }
+
+        .details p {
+            margin: 5px 0;
+        }
+
+        /* Payment form styles */
+        #payment-form {
+            flex-direction: column;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #card-element {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        /* Pay button */
+        #pay-button {
+            width: 100%;
             padding: 15px;
             background-color: #ff007f;
             color: white;
@@ -85,15 +124,17 @@
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            text-align: center;
         }
-        #confirm-button:hover {
+
+        #pay-button:hover {
             background-color: #d6006a;
             transform: scale(1.05);
         }
+
     </style>
 </head>
 <body>
+
     <header>
         <a href="https://ab23223.github.io/INTENCMEDIA/">
             <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738738526/INTEC_MEDIA1_famvag.png" alt="INTENCE MEDIA Logo">
@@ -101,16 +142,23 @@
         <nav>
             <ul>
                 <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#albums">Albums</a></li>
+                <li><a href="#albums">Albums</a></li> <!-- Added Albums link -->
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><a href="buy.html">Buy</a></li>
             </ul>
         </nav>
+        
     </header>
+
+
     <h2>Confirm Your Purchase</h2>
+
     <div class="checkout-container">
+        <!-- Left side: image thumbnails -->
         <div class="image-grid" id="checkoutGrid"></div>
+
+        <!-- Right side: package details -->
         <div class="details">
             <h3 id="packageName">Package Name: </h3>
             <p><strong>Price:</strong> <span id="packagePrice">$0</span></p>
@@ -118,17 +166,16 @@
             <p><strong>Total:</strong> <span id="total">$0</span></p>
         </div>
     </div>
-    <form id="checkout-form">
-        <input type="hidden" name="packageName" id="hiddenPackageName">
-        <input type="hidden" name="packagePrice" id="hiddenPackagePrice">
-        <input type="hidden" name="gst" id="hiddenGST">
-        <input type="hidden" name="totalPrice" id="hiddenTotal">
-        <input type="hidden" name="selectedImages" id="hiddenImages">
-        <button id="confirm-button" type="submit">Confirm Purchase</button>
+
+    <!-- Payment Form (Same Width as Checkout Container) -->
+    <form id="payment-form">
+        <div id="card-element"></div>
+        <button id="pay-button" type="submit">Pay Now</button>
     </form>
+
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const checkoutForm = document.getElementById("checkout-form");
             const checkoutGrid = document.getElementById("checkoutGrid");
             const selectedImages = JSON.parse(localStorage.getItem("selectedImages")) || [];
 
@@ -143,43 +190,69 @@
                 });
             }
 
-            const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage')) || { name: 'Basic Package', price: 5 };
+            // Get package info from localStorage
+            const selectedPackage = JSON.parse(localStorage.getItem('selectedPackage')) || {
+                name: 'Basic Package',
+                price: 5
+            };
+            
+
+            // Update package details
             const gstAmount = selectedPackage.price * 0.1;
             const totalAmount = selectedPackage.price + gstAmount;
+
+            console.log("Stored Package:", localStorage.getItem('selectedPackage'));
+            console.log("Selected Package:", selectedPackage);
+
 
             document.getElementById("packageName").textContent = `Package Name: ${selectedPackage.name}`;
             document.getElementById("packagePrice").textContent = `$${selectedPackage.price}`;
             document.getElementById("gst").textContent = `$${gstAmount.toFixed(2)}`;
             document.getElementById("total").textContent = `$${totalAmount.toFixed(2)}`;
 
-            document.getElementById("hiddenPackageName").value = selectedPackage.name;
-            document.getElementById("hiddenPackagePrice").value = selectedPackage.price;
-            document.getElementById("hiddenGST").value = gstAmount.toFixed(2);
-            document.getElementById("hiddenTotal").value = totalAmount.toFixed(2);
-            document.getElementById("hiddenImages").value = selectedImages.join(", ");
+            // Stripe Integration
+            const stripe = Stripe('pk_test_51QqjkZBFp1gEAbUcnGMm2pRZQG4Rb0LaFUbTVrbO8CxvSlVMAUlL3YiRLpCmcvkXny6sPuujHmLkSDkOPxEBcUU3008hysgIjm'); // Replace with your Stripe public key
+            const elements = stripe.elements();
+            const card = elements.create('card', {
+                hidePostalCode: true
+            });
+            card.mount('#card-element');
 
-            checkoutForm.addEventListener("submit", async (event) => {
+
+            // Handle form submission
+            document.getElementById("payment-form").addEventListener("submit", async (event) => {
                 event.preventDefault();
-                const formData = new FormData(checkoutForm);
-                try {
-                    const response = await fetch("https://formspree.io/mvgzryqz", {
-                        method: "POST",
-                        body: formData,
-                        headers: { "Accept": "application/json" }
+
+                const { token, error } = await stripe.createToken(card);
+
+                if (error) {
+                    alert(error.message);
+                } else {
+                    const response = await fetch('/create-charge', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            token: token.id,
+                            packageName: selectedPackage.name,
+                            packagePrice: selectedPackage.price,
+                            gst: gstAmount,
+                            total: totalAmount,
+                            selectedImages: selectedImages
+                        })
                     });
-                    if (response.ok) {
+
+                    const data = await response.json();
+                    if (data.success) {
                         localStorage.removeItem("selectedImages");
                         localStorage.removeItem("selectedPackage");
-                        window.location.href = "success.html";
+                        window.location.href = '/success.html';
                     } else {
-                        alert("Something went wrong. Please try again.");
+                        alert('Payment failed: ' + data.message);
                     }
-                } catch (error) {
-                    console.error("Error submitting form:", error);
-                    alert("An error occurred. Please try again later.");
                 }
             });
         });
     </script>
+
 </body>
 </html>
