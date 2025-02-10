@@ -5,7 +5,7 @@ from bottle import run, route, template, static_file
 def server_static(filepath):
     return static_file(filepath, root='./static')
 
-# Route for home page (shows albums or general content)
+# Route for home page (shows albums or general content) 
 @route('/')
 def index():
     return template('index')  # Make sure you have an 'index.tpl' template in the 'views/' folder
