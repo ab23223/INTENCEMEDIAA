@@ -161,6 +161,32 @@
             background-color: #d6006a;
             transform: scale(1.05);
         }
+    
+        /* Styling for the email input field */
+        #email {
+            width: 100%; /* Makes the input field take up the full width */
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ccc; /* Border color */
+            border-radius: 8px; /* Rounded corners */
+            background-color: #f9f9f9; /* Light background */
+            color: #333; /* Dark text color for readability */
+            margin-bottom: 15px; /* Space below the input */
+            transition: all 0.3s ease-in-out; /* Smooth transition effect */
+        }
+
+        /* Focus state styling */
+        #email:focus {
+            outline: none; /* Removes the default focus outline */
+            border-color: #ff007f; /* Change border color when focused */
+            background-color: #fff; /* Change background when focused */
+        }
+
+        /* Placeholder text styling */
+        #email::placeholder {
+            color: #888; /* Lighter color for placeholder */
+            font-style: italic; /* Italicize placeholder text */
+        }
     </style>
 </head>
 <body>
@@ -195,6 +221,8 @@
         </div>
     </div>
     <form id="checkout-form">
+        <label for="email">Email:</label>
+        <input type="email" name="email" id="email" required placeholder="Enter your email" />
         <input type="hidden" name="packageName" id="hiddenPackageName">
         <input type="hidden" name="packagePrice" id="hiddenPackagePrice">
         <input type="hidden" name="gst" id="hiddenGST">
@@ -246,6 +274,15 @@
 
             checkoutForm.addEventListener("submit", async (event) => {
                 event.preventDefault();
+
+                const email = document.getElementById("email").value;
+
+                // Simple validation to check if email is provided
+                if (!email) {
+                    alert("Please enter a valid email address.");
+                    return;
+                }
+
                 const formData = new FormData(checkoutForm);
                 try {
                     const response = await fetch("https://formspree.io/mvgzryqz", {
