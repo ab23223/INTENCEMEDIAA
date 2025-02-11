@@ -6,7 +6,7 @@
     <title>General Album- INTENCE MEDIA</title>
     <link rel="stylesheet" href="static/main.css">
 </head>
-<body>
+<head>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Timmana&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap');
@@ -387,9 +387,7 @@
             display: none;
             justify-content: center;
             align-items: center;
-            z-index: 1000; /* Ensures modal appears on top */
         }
-
 
         #fullscreen-modal img {
             max-width: 90%;
@@ -406,6 +404,8 @@
             cursor: pointer;
         }
     </style>
+</head>
+<body>
     <header>
         <a href="https://ab23223.github.io/INTENCMEDIA/">
             <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738738526/INTEC_MEDIA1_famvag.png" alt="INTENCE MEDIA Logo">
@@ -427,67 +427,6 @@
             <!-- Add images for the car album -->
             <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719568/GM_SHOW_13_ftmwgs.jpg" alt="Car 1" onclick="openFullscreen(this)">
             <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719630/GM_SHOW_49_lde1ge.jpg" alt="Car 2" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_28_qhftgm.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_16_gesayy.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719610/GM_SHOW_18_rgfgfg.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_43_dgwi4p.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_20_vam9uh.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_30_iooyn6.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719535/GM_SHOW_11_oo4vq6.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_2_ccwmgk.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_7_zkimlp.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_9_jswj4t.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_6_eeilcr.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_3_zyyukq.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236373/x0dfxtutpoiflocftwnc.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236374/t4s8gimzboe6wbhpoceb.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236375/hphaoszsotcpc3wh2mik.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236372/thgrv7ndsvkzoo0mhbhj.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236373/x0dfxtutpoiflocftwnc.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236374/t4s8gimzboe6wbhpoceb.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236377/va1vs54j7nzv8zqa2bzd.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236378/drg6qobhgkwvqoqtiaqe.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236378/zm4kmlxpu27qyy6ovpvw.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236378/mtwqpeveefb0ggkptrpy.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236378/yfly2sts0wtbfgnjxpwk.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236379/j2bxgrnbugbny7athibv.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236380/yhfu744plbxsx3ajczos.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236381/dyalu0gdslp1nycmi5sq.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236382/ylfiinzssrrp51brhfhp.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236383/bzllfgikfvqct2kmohnp.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236385/yxerq0dqba0sxby2eyvh.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236386/fgjmyidqfpxspi3r9f0d.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236386/e0pt71uehfhraonpvn9f.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236390/tm3uh1cr8rj4pofndhfh.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236677/ufamb8o9kc90qamkqpiq.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236677/fg1iy1frkvnqwd0enli3.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236677/fl5mkilxvpvfzswxxqqg.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236678/sc3ahnffxilwwrqucy5g.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236703/xcjhkqkz5zgme1yxwllp.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236703/sm6awhtzt5pqrhxfysvt.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236705/yg0sxgwnx48gsse4pbwc.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236706/ibbhl0xujcnipd8e2mg1.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236708/wsqpl2ixuewdpx5dnym8.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236709/njr44pxdauxuxp2ksrcc.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236710/fwas3j5sgs7jirvh6wgg.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236711/zmgz3dn4u9tpzp92bm2a.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236719/mzrwjt9zprb9v7xxeolw.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236726/xvcp9txtgqbsp5vi4rg3.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236733/gstxszzywpdxhwpbkau0.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236734/gheyncvph7bv4ufeixhy.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236743/k8jpmxheizj33qdd3lo3.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737877/VK_21_rwio6d.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737872/VK_17_tcrcgb.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737856/VK_8_t3ik3z.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737855/VK_6_bs67es.jpg" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="" alt="Car 3" onclick="openFullscreen(this)">
-            <img src="" alt="Car 3" onclick="openFullscreen(this)">
-
-
-
-
             <!-- Add more images as needed -->
         </div>
     </section>
@@ -506,20 +445,11 @@
         function openFullscreen(img) {
             var modal = document.getElementById("fullscreen-modal");
             var fullImg = document.getElementById("fullscreen-image");
-
-            if (modal && fullImg) {
-                fullImg.src = img.src;
-                modal.style.display = "flex";
-                images = document.querySelectorAll("#album-gallery img"); // Get all images
-                currentIndex = Array.from(images).indexOf(img); // Find the clicked image index
-            }
+            modal.style.display = "flex";
+            fullImg.src = img.src;
+            images = document.querySelectorAll('#album-gallery img'); // Get all images
+            currentIndex = Array.from(images).indexOf(img); // Find the clicked image index
         }
-        document.getElementById("fullscreen-modal").addEventListener("click", function(event) {
-            if (event.target === this) {
-                closeFullscreen();
-            }
-        });
-
 
         function closeFullscreen() {
             var modal = document.getElementById("fullscreen-modal");
@@ -538,7 +468,6 @@
                 document.getElementById("fullscreen-image").src = images[currentIndex].src;
             }
         }
-    });
         
         document.addEventListener("DOMContentLoaded", function() {
             const links = {

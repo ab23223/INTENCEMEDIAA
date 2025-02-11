@@ -376,6 +376,34 @@
             max-height: 600px;
             border-radius: 10px; /* Adds rounded corners for a softer look */
         }
+        #fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* Ensures modal appears on top */
+        }
+
+
+        #fullscreen-modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        /* Add styles for the close button */
+        #fullscreen-modal span {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -398,27 +426,75 @@
         <h2>VK Album</h2>
         <div class="album-images">
             <!-- Add images for the car album -->
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737887/VK_29_yiogyk.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737887/VK_30_vxarng.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737884/VK_26_ay4lim.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737883/VK_25_g1r4lg.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737879/VK_24_kp4py3.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737878/VK_20_h0lmab.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737877/VK_21_rwio6d.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737875/VK_19_kl8lyl.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737872/VK_17_tcrcgb.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737870/VK_11_uav2xb.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737870/VK_13_a9rzdh.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737856/VK_8_t3ik3z.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737855/VK_6_bs67es.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737855/VK_7_sijrvf.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737855/VK_5_libdrc.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737849/VK_4_ywe60i.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737842/VK_1_qska5c.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737842/VK_2_kyrtwm.jpg" alt="Car 1">
-            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737841/VK_3_e5wzje.jpg" alt="Car 1">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737887/VK_29_yiogyk.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737887/VK_30_vxarng.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737884/VK_26_ay4lim.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737883/VK_25_g1r4lg.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737879/VK_24_kp4py3.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737878/VK_20_h0lmab.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737877/VK_21_rwio6d.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737875/VK_19_kl8lyl.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737872/VK_17_tcrcgb.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737870/VK_11_uav2xb.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737870/VK_13_a9rzdh.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737856/VK_8_t3ik3z.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737855/VK_6_bs67es.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737855/VK_7_sijrvf.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737855/VK_5_libdrc.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737849/VK_4_ywe60i.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737842/VK_1_qska5c.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737842/VK_2_kyrtwm.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737841/VK_3_e5wzje.jpg" alt="Car 1" onclick="openFullscreen(this)">
+
             <!-- Add more images as needed -->
         </div>
     </section>
+
+    <div id="fullscreen-modal">
+        <span onclick="closeFullscreen()">×</span>
+        <img id="fullscreen-image" src="" alt="Fullscreen image">
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        let images = [];
+
+        function openFullscreen(img) {
+            var modal = document.getElementById("fullscreen-modal");
+            var fullImg = document.getElementById("fullscreen-image");
+
+            if (modal && fullImg) {
+                fullImg.src = img.src;
+                modal.style.display = "flex";
+                images = document.querySelectorAll("#album-gallery img"); // Get all images
+                currentIndex = Array.from(images).indexOf(img); // Find the clicked image index
+            }
+        }
+        document.getElementById("fullscreen-modal").addEventListener("click", function(event) {
+            if (event.target === this) {
+                closeFullscreen();
+            }
+        });
+
+
+        function closeFullscreen() {
+            var modal = document.getElementById("fullscreen-modal");
+            modal.style.display = "none";
+        }
+
+        document.addEventListener('keydown', function(event) {
+        var modal = document.getElementById("fullscreen-modal");
+        if (modal.style.display === "flex") { // Only execute if modal is open
+            if (event.key === "ArrowLeft") {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1; // Move left
+                document.getElementById("fullscreen-image").src = images[currentIndex].src;
+            }
+            if (event.key === "ArrowRight") {
+                currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0; // Move right
+                document.getElementById("fullscreen-image").src = images[currentIndex].src;
+            }
+        }
+    });
+    </script>
 </body>
 </html>
