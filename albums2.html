@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>All Albums - INTENCE MEDIA</title>
+    <title>General Album- INTENCE MEDIA</title>
     <link rel="stylesheet" href="static/main.css">
 </head>
-<body>
+<head>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Timmana&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap');
@@ -376,51 +376,154 @@
             max-height: 600px;
             border-radius: 10px; /* Adds rounded corners for a softer look */
         }
+
+        #fullscreen-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #fullscreen-modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+
+        /* Add styles for the close button */
+        #fullscreen-modal span {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+        }
     </style>
+</head>
+<body>
     <header>
         <a href="https://ab23223.github.io/INTENCMEDIA/">
             <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738738526/INTEC_MEDIA1_famvag.png" alt="INTENCE MEDIA Logo">
         </a>
         <nav>
             <ul>
-                <li><a href="#portfolio">Portfolio</a></li>
-                <li><a href="#albums">Albums</a></li> <!-- Added Albums link -->
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="https://ab23223.github.io/INTENCMEDIA/#portfolio">Portfolio</a></li>
+                <li><a href="https://ab23223.github.io/INTENCMEDIA/#albums" target="_self">Albums</a></li>
+                <li><a href="https://ab23223.github.io/INTENCMEDIA/#about">About</a></li>
+                <li><a href="https://ab23223.github.io/INTENCMEDIA/#contact">Contact</a></li>
                 <li><a href="buy.html">Buy</a></li>
             </ul>
-        </nav>
-        
+        </nav>        
     </header>
+    
+    <section id="album-gallery">
+        <h2>General Album</h2>
+        <div class="album-images">
+            <!-- Add images for the car album -->
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719568/GM_SHOW_13_ftmwgs.jpg" alt="Car 1" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719630/GM_SHOW_49_lde1ge.jpg" alt="Car 2" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_28_qhftgm.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_16_gesayy.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719610/GM_SHOW_18_rgfgfg.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_43_dgwi4p.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_20_vam9uh.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_30_iooyn6.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719535/GM_SHOW_11_oo4vq6.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_2_ccwmgk.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_7_zkimlp.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_9_jswj4t.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_6_eeilcr.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_3_zyyukq.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236373/x0dfxtutpoiflocftwnc.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236374/t4s8gimzboe6wbhpoceb.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236375/hphaoszsotcpc3wh2mik.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236372/thgrv7ndsvkzoo0mhbhj.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236373/x0dfxtutpoiflocftwnc.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236374/t4s8gimzboe6wbhpoceb.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236377/va1vs54j7nzv8zqa2bzd.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236378/drg6qobhgkwvqoqtiaqe.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236378/zm4kmlxpu27qyy6ovpvw.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236378/mtwqpeveefb0ggkptrpy.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236378/yfly2sts0wtbfgnjxpwk.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236379/j2bxgrnbugbny7athibv.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236380/yhfu744plbxsx3ajczos.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236381/dyalu0gdslp1nycmi5sq.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236382/ylfiinzssrrp51brhfhp.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1739236383/bzllfgikfvqct2kmohnp.jpg" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="" alt="Car 3" onclick="openFullscreen(this)">
+            <img src="" alt="Car 3" onclick="openFullscreen(this)">
 
-    <section id="albums">
-        <h2>All Photo Albums</h2>
-        <div class="album-container">
-            <!-- Example of multiple albums -->
-            <div class="album">
-                <a href="album_gmshow.html">
-                    <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738712726/vk_side_dark_wjmie0.jpg" alt="GM Show Album">
-                </a>
-            </div>
-            <div class="album">
-                <a href="album_car.html">
-                    <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg" alt="Car Album">
-                </a>
-            </div>
-            <div class="album">
-                <a href="album_vk.html">
-                    <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737879/VK_24_kp4py3.jpg" alt="VK Album">
-                </a>
-            </div>
-            <div class="album">
-                <a href="albums2.html">
-                    <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737879/VK_24_kp4py3.jpg" alt="VK Album">
-                </a>
-            </div>
-            <!-- Add more albums as necessary -->
+
+            <!-- Add more images as needed -->
         </div>
     </section>
-    
-    <!-- Add footer here -->
+
+
+    <!-- Fullscreen Modal -->
+    <div id="fullscreen-modal">
+        <span onclick="closeFullscreen()">×</span>
+        <img id="fullscreen-image" src="" alt="Fullscreen image">
+    </div>
+
+    <script>
+        let currentIndex = 0;
+        let images = [];
+
+        function openFullscreen(img) {
+            var modal = document.getElementById("fullscreen-modal");
+            var fullImg = document.getElementById("fullscreen-image");
+            modal.style.display = "flex";
+            fullImg.src = img.src;
+            images = document.querySelectorAll('#album-gallery img'); // Get all images
+            currentIndex = Array.from(images).indexOf(img); // Find the clicked image index
+        }
+
+        function closeFullscreen() {
+            var modal = document.getElementById("fullscreen-modal");
+            modal.style.display = "none";
+        }
+
+        document.addEventListener('keydown', function(event) {
+        var modal = document.getElementById("fullscreen-modal");
+        if (modal.style.display === "flex") { // Only execute if modal is open
+            if (event.key === "ArrowLeft") {
+                currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1; // Move left
+                document.getElementById("fullscreen-image").src = images[currentIndex].src;
+            }
+            if (event.key === "ArrowRight") {
+                currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0; // Move right
+                document.getElementById("fullscreen-image").src = images[currentIndex].src;
+            }
+        }
+        
+        document.addEventListener("DOMContentLoaded", function() {
+            const links = {
+                "https://ab23223.github.io/INTENCMEDIA/#portfolio": "https://ab23223.github.io/INTENCMEDIA/portfolio.html",
+                "https://ab23223.github.io/INTENCMEDIA/#albums": "https://ab23223.github.io/INTENCMEDIA/albums.html",
+                "https://ab23223.github.io/INTENCMEDIA/#about": "https://ab23223.github.io/INTENCMEDIA/about.html",
+                "https://ab23223.github.io/INTENCMEDIA/#contact": "https://ab23223.github.io/INTENCMEDIA/contact.html"
+            };
+
+            document.querySelectorAll("nav ul li a").forEach(link => {
+                const url = link.getAttribute("href");
+                if (links[url]) {
+                    link.addEventListener("click", function(event) {
+                        event.preventDefault();
+                        window.location.href = links[url];
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

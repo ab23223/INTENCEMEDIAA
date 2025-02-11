@@ -1,4 +1,11 @@
-from bottle import run, route, template, static_file
+from bottle import Bottle,run, route, template, static_file
+
+
+app = Bottle()
+
+@app.route('/')
+def index():
+    return template('index')
 
 # Route to serve static files like images, CSS, etc.
 @route('/static/<filepath:path>')
@@ -56,7 +63,9 @@ def success():
 def select():
     return template('select.html')  # Make sure you have an 'album_gmshow.tpl' template in the 'views/' folder
 
-
-
+@route('/albums2.html')
+def albums2():
+    return template('albums2.html')
+    
 # Run the app
 run(reloader=True)
