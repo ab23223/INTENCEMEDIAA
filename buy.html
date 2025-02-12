@@ -27,23 +27,39 @@
         <div class="pricing-grid">
             <div class="pricing-box" data-limit="1" data-name="1 Image" data-price="5">
                 <h3>Basic Package</h3>
-                <p class="package-info">1 Image</p> <!-- New paragraph for the number of images -->
+                <p class="package-info">1 Image</p>
                 <p class="price">$5</p>
                 <button class="select-package">Select</button>
+                <div class="quantity-control" style="display: none;">
+                    <button class="minus">-</button>
+                    <span class="quantity">1</span>
+                    <button class="plus">+</button>
+                </div>
             </div>
             <div class="pricing-box" data-limit="5" data-name="5 Images" data-price="20">
                 <h3>Standard Package</h3>
                 <p class="package-info">5 Images</p>
                 <p class="price">$20</p>
                 <button class="select-package">Select</button>
+                <div class="quantity-control" style="display: none;">
+                    <button class="minus">-</button>
+                    <span class="quantity">1</span>
+                    <button class="plus">+</button>
+                </div>
             </div>
             <div class="pricing-box" data-limit="10" data-name="10 Images" data-price="40">
                 <h3>Ultimate Package</h3>
                 <p class="package-info">10 Images</p>
                 <p class="price">$40</p>
                 <button class="select-package">Select</button>
-            </div>            
+                <div class="quantity-control" style="display: none;">
+                    <button class="minus">-</button>
+                    <span class="quantity">1</span>
+                    <button class="plus">+</button>
+                </div>
+            </div>
         </div>
+        <button id="select-images" disabled>Select Images</button>
     </section>
 
     <!-- Image Selection Section -->
@@ -57,92 +73,195 @@
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            updateCartCount();
+    document.addEventListener("DOMContentLoaded", function () {
+        updateCartCount();
+        
+        const selectedPackages = [];
 
-            document.querySelectorAll(".select-package").forEach(button => {
-                button.addEventListener("click", function () {
-                    let box = this.parentElement;
-                    let limit = box.getAttribute("data-limit");
-                    window.location.href = `select.html?limit=${limit}`;
-                });
-            });
-
-            const images = [
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719568/GM_SHOW_13_ftmwgs.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719630/GM_SHOW_49_lde1ge.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_28_qhftgm.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_16_gesayy.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719610/GM_SHOW_18_rgfgfg.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_43_dgwi4p.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_20_vam9uh.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_30_iooyn6.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719535/GM_SHOW_11_oo4vq6.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_2_ccwmgk.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_7_zkimlp.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_9_jswj4t.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_6_eeilcr.jpg",
-                "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_3_zyyukq.jpg"
-            ];
-
-            const imageGrid = document.getElementById("image-grid");
-            images.forEach((imageSrc) => {
-                let imgElement = document.createElement("img");
-                imgElement.src = imageSrc;
-                imgElement.classList.add("image-item");
-                imageGrid.appendChild(imgElement);
-            });
-        });
-
+        // Function to update the cart count
         function updateCartCount() {
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
             document.getElementById("cart-count").innerText = cart.length;
         }
+
+        // Add event listeners to the select buttons for packages
+        document.querySelectorAll(".select-package").forEach(button => {
+            button.addEventListener("click", function () {
+                let box = this.parentElement;
+                let limit = box.getAttribute("data-limit");
+                let name = box.getAttribute("data-name");
+                let price = box.getAttribute("data-price");
+                let quantityControl = box.querySelector(".quantity-control");
+
+                // Toggle package selection
+                if (selectedPackages.some(pkg => pkg.name === name)) {
+                    selectedPackages.splice(selectedPackages.findIndex(pkg => pkg.name === name), 1); // Deselect
+                    this.classList.remove("selected");
+                    quantityControl.style.display = "none";
+                } else {
+                    selectedPackages.push({ name, limit, price, quantity: 1 });
+                    this.classList.add("selected");
+                    quantityControl.style.display = "block";
+                }
+
+                // Update localStorage with the selected packages
+                localStorage.setItem("cart", JSON.stringify(selectedPackages));
+
+                // Enable or disable the "Select Images" button based on selection
+                document.getElementById("select-images").disabled = selectedPackages.length === 0;
+
+                // Update the cart count after selection
+                updateCartCount();
+            });
+        });
+
+        // Handle quantity increase and decrease
+        document.querySelectorAll('.plus').forEach(button => {
+            button.addEventListener('click', function() {
+                let box = this.closest('.pricing-box');
+                let packageName = box.getAttribute('data-name');
+                let package = selectedPackages.find(pkg => pkg.name === packageName);
+                let quantityElement = box.querySelector('.quantity');
+                if (package && package.quantity < package.limit) {
+                    package.quantity++;
+                    quantityElement.textContent = package.quantity;
+                }
+            });
+        });
+
+        document.querySelectorAll('.minus').forEach(button => {
+            button.addEventListener('click', function() {
+                let box = this.closest('.pricing-box');
+                let packageName = box.getAttribute('data-name');
+                let package = selectedPackages.find(pkg => pkg.name === packageName);
+                let quantityElement = box.querySelector('.quantity');
+                if (package && package.quantity > 1) {
+                    package.quantity--;
+                    quantityElement.textContent = package.quantity;
+                } else {
+                    // Remove package if quantity reaches 0
+                    selectedPackages.splice(selectedPackages.findIndex(pkg => pkg.name === packageName), 1);
+                    box.querySelector('.select-package').classList.remove("selected");
+                    box.querySelector('.quantity-control').style.display = "none";
+                }
+
+                // Update localStorage with the selected packages
+                localStorage.setItem("cart", JSON.stringify(selectedPackages));
+
+                // Enable or disable the "Select Images" button based on selection
+                document.getElementById("select-images").disabled = selectedPackages.length === 0;
+
+                // Update the cart count after selection
+                updateCartCount();
+            });
+        });
+
+        // Add images to the grid (sample images)
+        const images = [
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719568/GM_SHOW_13_ftmwgs.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719630/GM_SHOW_49_lde1ge.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_28_qhftgm.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_16_gesayy.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719610/GM_SHOW_18_rgfgfg.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_43_dgwi4p.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_20_vam9uh.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_30_iooyn6.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719535/GM_SHOW_11_oo4vq6.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_2_ccwmgk.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_7_zkimlp.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_9_jswj4t.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_6_eeilcr.jpg",
+            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_3_zyyukq.jpg"
+        ];
+
+        const imageGrid = document.getElementById("image-grid");
+        images.forEach((imageSrc) => {
+            let imgElement = document.createElement("img");
+            imgElement.src = imageSrc;
+            imgElement.classList.add("image-item");
+            imageGrid.appendChild(imgElement);
+        });
+
+        // Handle "Select Images" button click
+        document.getElementById("select-images").addEventListener("click", function() {
+            const packageParams = selectedPackages.map(pkg => `${pkg.name}-${pkg.quantity}`).join(',');
+            window.location.href = `select.html?packages=${encodeURIComponent(packageParams)}`;
+        });
+    });
     </script>
 
     <style>
-        .pricing-box {
-            background: white;
-            padding: 15px; /* Reduce padding to fit content better */
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 200px;
-            height: 180px; /* Adjust height to fit all content */
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between; /* Distribute content evenly */
+        /* Additional styles */
+        .pricing-box button.selected {
+            background-color: #4CAF50;
         }
-
-        .package-info {
-            font-size: 14px; /* Slightly smaller to fit better */
-            color: #666;
-            margin: 0; /* Remove extra spacing */
-            white-space: nowrap; /* Ensure it stays on one line */
+        .pricing-box button.selected:hover {
+            background-color: #45a049;
         }
-
-        .price {
-            font-size: 18px; /* Keep it readable but compact */
-            font-weight: bold;
-            color: #333;
-            margin: 5px 0;
-        }
-
-        .pricing {
-            text-align: center;
-            padding: 50px;
-        }
-        .pricing-box button {
+        #select-images {
+            margin-top: 20px;
             background-color: #ff007f;
             color: white;
-            padding: 10px 15px;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
-            margin-top: auto; /* Pushes the button to the bottom */
+        }
+        #select-images:disabled {
+            background-color: #d3d3d3;
+            cursor: not-allowed;
+        }
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        header a img {
+            height: 50px;
+            margin-left: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            text-align: center;
+            padding: 50px;
         }
 
         .pricing-grid {
@@ -152,10 +271,74 @@
             flex-wrap: wrap;
         }
 
+        .pricing-box {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 200px;
+            height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .package-info {
+            font-size: 14px;
+            color: #666;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin: 5px 0;
+        }
+
+        .pricing-box button {
+            background-color: #ff007f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: auto;
+        }
+
         .pricing-box button:hover {
             background-color: #e6006f;
         }
 
+        .pricing-box button.selected {
+            background-color: #4CAF50;
+        }
+
+        .pricing-box button.selected:hover {
+            background-color: #45a049;
+        }
+
+        #select-images {
+            margin-top: 20px;
+            background-color: #ff007f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        #select-images:disabled {
+            background-color: #d3d3d3;
+            cursor: not-allowed;
+        }
+
+        /* Image Selection Section */
         .image-selection {
             text-align: center;
             padding: 50px;
@@ -175,6 +358,13 @@
             height: auto;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
     </style>
 </body>

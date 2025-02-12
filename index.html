@@ -19,6 +19,7 @@
             padding: 0;
             background-color: #f5f5f5;
             color: #333;
+            
         }
 
         header {
@@ -314,14 +315,6 @@
             font-weight: bold;
         }
 
-        footer {
-            background: #000;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
         h1 {
             font-size: 50px;
         }
@@ -376,6 +369,50 @@
             max-height: 600px;
             border-radius: 10px; /* Adds rounded corners for a softer look */
         }
+        #info-section1 {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 50px;
+            background-color: #fff; /* White background to keep it clean */
+            flex-direction: row-reverse; /* This swaps the order: image first, then text */
+            overflow: hidden;
+        }
+
+        .info-text1 {
+            flex: 1;
+            padding: 0px;
+            text-align: left;
+            transform: translateX(90px); /* Moves text right */
+        }
+
+        .info-text1 h2 {
+            font-size: 45px;
+            margin-bottom: 40px;
+            margin-top: -270px;
+            margin-left: 50px;
+            margin-right: 0px;
+        }
+
+        .info-text1 p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+            margin-left: 50px;
+            margin-right: 300px;
+        }
+
+        .info-image1 {
+            flex: 1;
+            text-align: center;
+        }
+
+        .info-image1 img {
+            max-width: 70%;
+            max-height: 600px;
+            border-radius: 10px; /* Adds rounded corners for a softer look */
+        }
+
     </style>
     <header>
         <a href="https://ab23223.github.io/INTENCMEDIA/">
@@ -430,10 +467,16 @@
         </div>
     </section>
     
-    <section id="portfolio">
-        <h2>Portfolio</h2>
-        <p>Hey, I’m Ashton, a 15-year-old photographer who’s always looking for the next great shot. Whether it’s cars, people, or anything that catches my eye, I focus on capturing real moments with the best detail possible. Photography is more than just a hobby for me—it’s something I’m constantly learning and improving on, one shot at a time.</p>
+    <section id="info-section1">
+        <div class="info-text1">
+            <h2>About Me</h2>
+            <p>Hey, I’m Ashton, a 15-year-old photographer who’s always looking for the next great shot. Whether it’s cars, people, or anything that catches my eye, I focus on capturing real moments with the best detail possible. Photography is more than just a hobby for me—it’s something I’m constantly learning and improving on, one shot at a time.</p>
+        </div>
+        <div class="info-image1">
+            <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738712765/GM_SHOW_3_y2ykrq.jpg" alt="Photography in action">
+        </div>
     </section>
+
 
 
     <section id="albums">
