@@ -7,6 +7,134 @@
     <link rel="stylesheet" href="static/main.css">
 </head>
 <body>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f8f8f8;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 20px 0;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        header a img {
+            height: 50px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #333;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #f5f5f5;
+            font-size: 14px;
+            margin-top: 40px;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .pricing-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .pricing-box {
+            background: white;
+            padding: 20px;
+            padding-bottom: 60px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 220px;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .package-info {
+            font-size: 14px;
+            color: #666;
+            white-space: nowrap; /* Ensures text stays on one line */
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+            
+        .price {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            display: inline-block;
+        }
+
+        .pricing-box button {
+            background-color: #ff007f;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .pricing-box button:hover {
+            background-color: #e6006f;
+        }
+
+        .pricing-box button.selected {
+            background-color: #4CAF50;
+        }
+
+        .pricing-box button.selected:hover {
+            background-color: #45a049;
+        }
+
+        #select-images {
+            margin-top: 20px;
+            background-color: #ff007f;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        #select-images:disabled {
+            background-color: #d3d3d3;
+            cursor: not-allowed;
+        }
+    </style>
     <header>
         <a href="index.html">
             <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738738526/INTEC_MEDIA1_famvag.png" alt="INTENCE MEDIA Logo">
@@ -62,12 +190,6 @@
         <button id="select-images" disabled>Select Images</button>
     </section>
 
-    <!-- Image Selection Section -->
-    <section class="image-selection">
-        <h2>Select Your Images</h2>
-        <div class="image-grid" id="image-grid"></div>
-    </section>
-
     <footer>
         <p>&copy; 2025 INTENCE MEDIA. All rights reserved.</p>
     </footer>
@@ -76,55 +198,56 @@
     document.addEventListener("DOMContentLoaded", function () {
         updateCartCount();
         
-        const selectedPackages = [];
+        let selectedPackages = [];
 
-        // Function to update the cart count
         function updateCartCount() {
             let cart = JSON.parse(localStorage.getItem("cart")) || [];
             document.getElementById("cart-count").innerText = cart.length;
         }
 
-        // Add event listeners to the select buttons for packages
+        function getTotalImageLimit() {
+            return selectedPackages.reduce((total, pkg) => total + (pkg.limit * pkg.quantity), 0);
+        }
+
         document.querySelectorAll(".select-package").forEach(button => {
             button.addEventListener("click", function () {
                 let box = this.parentElement;
-                let limit = box.getAttribute("data-limit");
                 let name = box.getAttribute("data-name");
+                let limit = parseInt(box.getAttribute("data-limit"));
                 let price = box.getAttribute("data-price");
                 let quantityControl = box.querySelector(".quantity-control");
+                let quantityElement = box.querySelector(".quantity");
 
-                // Toggle package selection
-                if (selectedPackages.some(pkg => pkg.name === name)) {
-                    selectedPackages.splice(selectedPackages.findIndex(pkg => pkg.name === name), 1); // Deselect
+                let packageIndex = selectedPackages.findIndex(pkg => pkg.name === name);
+
+                if (packageIndex > -1) {
+                    selectedPackages.splice(packageIndex, 1);
                     this.classList.remove("selected");
                     quantityControl.style.display = "none";
                 } else {
                     selectedPackages.push({ name, limit, price, quantity: 1 });
                     this.classList.add("selected");
                     quantityControl.style.display = "block";
+                    quantityElement.textContent = 1;
                 }
 
-                // Update localStorage with the selected packages
                 localStorage.setItem("cart", JSON.stringify(selectedPackages));
-
-                // Enable or disable the "Select Images" button based on selection
                 document.getElementById("select-images").disabled = selectedPackages.length === 0;
-
-                // Update the cart count after selection
                 updateCartCount();
             });
         });
 
-        // Handle quantity increase and decrease
         document.querySelectorAll('.plus').forEach(button => {
             button.addEventListener('click', function() {
                 let box = this.closest('.pricing-box');
-                let packageName = box.getAttribute('data-name');
-                let package = selectedPackages.find(pkg => pkg.name === packageName);
+                let name = box.getAttribute('data-name');
+                let package = selectedPackages.find(pkg => pkg.name === name);
                 let quantityElement = box.querySelector('.quantity');
-                if (package && package.quantity < package.limit) {
+
+                if (package) {
                     package.quantity++;
                     quantityElement.textContent = package.quantity;
+                    localStorage.setItem("cart", JSON.stringify(selectedPackages));
                 }
             });
         });
@@ -132,240 +255,35 @@
         document.querySelectorAll('.minus').forEach(button => {
             button.addEventListener('click', function() {
                 let box = this.closest('.pricing-box');
-                let packageName = box.getAttribute('data-name');
-                let package = selectedPackages.find(pkg => pkg.name === packageName);
+                let name = box.getAttribute('data-name');
+                let packageIndex = selectedPackages.findIndex(pkg => pkg.name === name);
                 let quantityElement = box.querySelector('.quantity');
-                if (package && package.quantity > 1) {
-                    package.quantity--;
-                    quantityElement.textContent = package.quantity;
-                } else {
-                    // Remove package if quantity reaches 0
-                    selectedPackages.splice(selectedPackages.findIndex(pkg => pkg.name === packageName), 1);
-                    box.querySelector('.select-package').classList.remove("selected");
-                    box.querySelector('.quantity-control').style.display = "none";
+
+                if (packageIndex > -1) {
+                    let package = selectedPackages[packageIndex];
+
+                    if (package.quantity > 1) {
+                        package.quantity--;
+                        quantityElement.textContent = package.quantity;
+                    } else {
+                        selectedPackages.splice(packageIndex, 1);
+                        box.querySelector('.select-package').classList.remove("selected");
+                        box.querySelector('.quantity-control').style.display = "none";
+                    }
+
+                    localStorage.setItem("cart", JSON.stringify(selectedPackages));
                 }
 
-                // Update localStorage with the selected packages
-                localStorage.setItem("cart", JSON.stringify(selectedPackages));
-
-                // Enable or disable the "Select Images" button based on selection
                 document.getElementById("select-images").disabled = selectedPackages.length === 0;
-
-                // Update the cart count after selection
                 updateCartCount();
             });
         });
 
-        // Add images to the grid (sample images)
-        const images = [
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719568/GM_SHOW_13_ftmwgs.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719630/GM_SHOW_49_lde1ge.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_28_qhftgm.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_16_gesayy.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719610/GM_SHOW_18_rgfgfg.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719609/GM_SHOW_43_dgwi4p.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_20_vam9uh.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719608/GM_SHOW_30_iooyn6.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719535/GM_SHOW_11_oo4vq6.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_2_ccwmgk.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_7_zkimlp.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719532/GM_SHOW_9_jswj4t.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_6_eeilcr.jpg",
-            "https://res.cloudinary.com/dfqreujbo/image/upload/v1738719531/GM_SHOW_3_zyyukq.jpg"
-        ];
-
-        const imageGrid = document.getElementById("image-grid");
-        images.forEach((imageSrc) => {
-            let imgElement = document.createElement("img");
-            imgElement.src = imageSrc;
-            imgElement.classList.add("image-item");
-            imageGrid.appendChild(imgElement);
-        });
-
-        // Handle "Select Images" button click
         document.getElementById("select-images").addEventListener("click", function() {
-            const packageParams = selectedPackages.map(pkg => `${pkg.name}-${pkg.quantity}`).join(',');
-            window.location.href = `select.html?packages=${encodeURIComponent(packageParams)}`;
+            let totalLimit = getTotalImageLimit();
+            window.location.href = `select.html?limit=${totalLimit}`;
         });
     });
     </script>
-
-    <style>
-        /* Additional styles */
-        .pricing-box button.selected {
-            background-color: #4CAF50;
-        }
-        .pricing-box button.selected:hover {
-            background-color: #45a049;
-        }
-        #select-images {
-            margin-top: 20px;
-            background-color: #ff007f;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        #select-images:disabled {
-            background-color: #d3d3d3;
-            cursor: not-allowed;
-        }
-        /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        header {
-            background-color: #fff;
-            padding: 20px 0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        header a img {
-            height: 50px;
-            margin-left: 20px;
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        nav ul li {
-            margin-left: 20px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #333;
-            font-size: 16px;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #f5f5f5;
-            font-size: 14px;
-            margin-top: 40px;
-        }
-
-        /* Pricing Section */
-        .pricing {
-            text-align: center;
-            padding: 50px;
-        }
-
-        .pricing-grid {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .pricing-box {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 200px;
-            height: 180px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .package-info {
-            font-size: 14px;
-            color: #666;
-            margin: 0;
-            white-space: nowrap;
-        }
-
-        .price {
-            font-size: 18px;
-            font-weight: bold;
-            color: #333;
-            margin: 5px 0;
-        }
-
-        .pricing-box button {
-            background-color: #ff007f;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: auto;
-        }
-
-        .pricing-box button:hover {
-            background-color: #e6006f;
-        }
-
-        .pricing-box button.selected {
-            background-color: #4CAF50;
-        }
-
-        .pricing-box button.selected:hover {
-            background-color: #45a049;
-        }
-
-        #select-images {
-            margin-top: 20px;
-            background-color: #ff007f;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        #select-images:disabled {
-            background-color: #d3d3d3;
-            cursor: not-allowed;
-        }
-
-        /* Image Selection Section */
-        .image-selection {
-            text-align: center;
-            padding: 50px;
-        }
-
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            padding: 20px;
-            max-width: 800px;
-            margin: auto;
-        }
-
-        .image-item {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-    </style>
 </body>
 </html>
