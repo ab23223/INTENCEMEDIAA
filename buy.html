@@ -195,9 +195,40 @@
     </footer>
 
     <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const packageButtons = document.querySelectorAll(".select-package");
+        const selectImagesButton = document.getElementById("select-images");
+
+        packageButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                const pricingBox = button.closest(".pricing-box");
+                const packageName = pricingBox.getAttribute("data-name");
+                const packagePrice = parseFloat(pricingBox.getAttribute("data-price"));
+
+                // Store selected package details in localStorage
+                localStorage.setItem("selectedPackage", JSON.stringify({
+                    name: packageName,
+                    price: packagePrice
+                }));
+
+                // Highlight the selected package
+                packageButtons.forEach(btn => btn.classList.remove("selected"));
+                button.classList.add("selected");
+
+                // Enable the "Select Images" button
+                selectImagesButton.disabled = false;
+            });
+        });
+
+        // Ensure button is enabled if a package was previously selected
+        if (localStorage.getItem("selectedPackage")) {
+            selectImagesButton.disabled = false;
+        }
+    });
+
     document.addEventListener("DOMContentLoaded", function () {
         updateCartCount();
-        
+
         let selectedPackages = [];
 
         function updateCartCount() {
@@ -284,6 +315,8 @@
             window.location.href = `select.html?limit=${totalLimit}`;
         });
     });
+</script>
+
     </script>
 </body>
 </html>
