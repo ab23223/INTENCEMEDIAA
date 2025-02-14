@@ -31,7 +31,15 @@
             justify-content: space-between;
             width: 97%;
             height: 100px; /* Adjust the height as needed */
-            position: relative;
+            position: fixed;
+            z-index: 100; /* Ensures it stays above other content */
+            opacity: 1;  /* Initially visible */
+            transition: opacity 0.3s ease-out;  /* Smooth transition for fading */
+        }
+
+        /* Optional: Add some shadow to header when it's visible */
+        header.visible {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
         header img {
@@ -563,6 +571,23 @@
     
     
     <script>
+        let lastScrollTop = 0; // Variable to track the last scroll position
+        const header = document.querySelector('header'); // Select the header element
+
+        window.addEventListener('scroll', function() {
+            let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+            // When scrolling down, fade out the header
+            if (currentScroll > lastScrollTop) {
+                header.style.opacity = '0'; // Fade out
+            } else {
+                header.style.opacity = '1'; // Fade in
+            }
+
+            // Update the last scroll position to the current position
+            lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Prevent negative values
+        });
+
         let index = 0;
         const slider = document.querySelector(".slider");
         const images = document.querySelectorAll(".slider img");
