@@ -129,6 +129,14 @@
             flex-shrink: 0;
             border-radius: 8px;
         }
+        /* Add this to your existing CSS */
+        #photo-slider .zoomed {
+            transform: scale(1.2); /* Adjust this value for the zoom effect */
+            transition: transform 0.5s ease; /* Smooth zoom-in effect */
+            width: 100vw; /* Makes the image take up the whole screen width */
+            height: 100vh; /* Makes the image take up the whole screen height */
+            object-fit: cover; /* Ensures the image fills the screen */
+        }
 
         /* Arrow button styles */
         .arrow {
