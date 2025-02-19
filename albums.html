@@ -19,6 +19,7 @@
             padding: 0;
             background-color: #f5f5f5;
             color: #333;
+            animation: fadeIn 1.2s ease-in;
         }
 
         header {
@@ -327,7 +328,23 @@
         }
 
         h2 {
-            font-size: 40px;
+            font-size: 2.5rem; /* Bigger headings */
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #f8f8f8; /* Light color for contrast */
+            background: linear-gradient(90deg, #ff8c00, #ff2e63);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p{
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #ddd;
+            line-height: 1.6;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
         }
 
         section p{
@@ -376,6 +393,108 @@
             max-height: 600px;
             border-radius: 10px; /* Adds rounded corners for a softer look */
         }
+        #albums {
+            text-align: center;
+            padding: 50px;
+            background-color: #fff;
+        }
+
+        .album-section {
+            display: flex;
+             margin-bottom: 40px; /* This will add space between each album */
+            align-items: center;
+            justify-content: center;
+            padding: 50px 0;
+            padding: 30px 20px;
+            border-radius: 15px;
+            background: rgba(30, 30, 30, 0.85);
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;    
+        }
+
+        .album-section:hover {
+            transform: scale(1.02);
+            box-shadow: 0px 15px 40px rgba(255, 140, 0, 0.3);
+        }
+
+        .album-text {
+            flex: 1;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .album-text h2 {
+            font-size: 45px;
+            margin-bottom: 20px;
+            margin-left: 50px;
+            margin-right: 50px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 8px;
+        }
+        .album-text h2::after {
+            content: "";
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff8c00, #ff2e63);
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+        }
+
+
+        .album-text p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #555;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+
+        .album-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .album-image img {
+            max-width: 70%;
+            max-height: 600px;
+            border-radius: 10px;
+            transition: transform 0.4s ease-in-out, box-shadow 0.4s ease;
+        }
+
+        .album-image img:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0px 10px 20px rgba(255, 140, 0, 0.5);
+        }
+
+        section {
+            margin-bottom: 40px; /* Add gap between sections */
+        }
+
+        /* Default state before animation */
+        .hidden {
+            opacity: 0;
+            transform: translateY(50px); /* Moves it slightly down */
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        /* When in viewport, apply this */
+        .show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
     </style>
     <header>
         <a href="https://ab23223.github.io/INTENCMEDIA/">
@@ -395,31 +514,61 @@
 
     <section id="albums">
         <h2>All Photo Albums</h2>
-        <div class="album-container">
-            <!-- Example of multiple albums -->
-            <div class="album">
+    
+        <div class="album-section hidden">
+            <div class="album-text">
+                <h2>GM Show</h2>
+                <p>Experience the best shots from the GM Show, featuring some of the most stunning cars and moments captured.</p>
+            </div>
+            <div class="album-image">
                 <a href="album_gmshow.html">
                     <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738712726/vk_side_dark_wjmie0.jpg" alt="GM Show Album">
                 </a>
             </div>
-            <div class="album">
+        </div>
+    
+        <div class="album-section hidden">
+            <div class="album-text">
+                <h2>Car Album</h2>
+                <p>A collection of amazing car shots that showcase speed, style, and design from different angles.</p>
+            </div>
+            <div class="album-image">
                 <a href="album_car.html">
                     <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738719533/GM_SHOW_10_v5srhg.jpg" alt="Car Album">
                 </a>
             </div>
-            <div class="album">
+        </div>
+    
+        <div class="album-section hidden">
+            <div class="album-text">
+                <h2>VK Album</h2>
+                <p>Discover moments from VK events with a mix of portraits and candid shots that capture the energy.</p>
+            </div>
+            <div class="album-image">
                 <a href="album_vk.html">
                     <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737879/VK_24_kp4py3.jpg" alt="VK Album">
                 </a>
             </div>
-            <div class="album">
-                <a href="albums2.html">
-                    <img src="https://res.cloudinary.com/dfqreujbo/image/upload/v1738737879/VK_24_kp4py3.jpg" alt="VK Album">
-                </a>
-            </div>
-            <!-- Add more albums as necessary -->
         </div>
     </section>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const hiddenElements = document.querySelectorAll(".hidden");
+        
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("show");
+                        observer.unobserve(entry.target); // Stops observing once shown
+                    }
+                });
+            }, { threshold: 0.2 });
+        
+            hiddenElements.forEach(el => observer.observe(el));
+        });
+        </script>
+    
     
     <!-- Add footer here -->
 </body>
