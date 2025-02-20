@@ -114,15 +114,20 @@
             display: flex;
             overflow: hidden;
             width: auto;
+            width: 100%;  /* Ensures the wrapper takes the full width */
         }
 
         .slider {
             display: inline-flex;
             transition: transform 0.5s ease-in-out;
             gap: 20px;
+            gap: 0;  /* Set the gap to zero, so no space between images */
+            width: auto; /* Ensure the images take the full width */
         }
 
         .slider img {
+            width: 100%;  /* Set each image to fill the container width */
+            flex-shrink: 0;  /* Prevent images from shrinking */
             width: 100%;
             height: auto;  /* Maintains aspect ratio */
             object-fit: cover; /* Ensures the image covers the container without stretching */
@@ -597,32 +602,50 @@
             lastScrollTop = currentScroll <= 0 ? 0 : currentScroll; // Prevent negative values
         });
 
-        let index = 0;
-        const slider = document.querySelector(".slider");
-        const images = document.querySelectorAll(".slider img");
-        const totalImages = images.length;
-        const gap = 20;  // The gap between images
-        
-        // Function to move the slider
-        function moveSlider(direction) {
-            const imageWidth = images[0].clientWidth;  // Get the width of a single image
-            
-            // Adjust index based on direction
-            index = (index + direction + totalImages) % totalImages;
-            
-            // Move the slider by the width of one image plus the gap
-            slider.style.transition = "transform 0.5s ease-in-out";
-            slider.style.transform = `translateX(-${(imageWidth + gap) * index}px)`;  // Calculate the movement with the gap
-        }
+        // Select the slider container and all images
+        const slider = document.querySelector('.slider');
+        const images = slider.querySelectorAll('img');
+        const nextButton = document.querySelector('.next');
+        const prevButton = document.querySelector('.prev');
 
-        // Event listeners for the arrows
-        document.querySelector('.prev').addEventListener('click', () => {
-            moveSlider(-1); // Move to the previous image
+        // Track the current index of the displayed image
+        let currentIndex = 0;
+
+        // Move to the next image
+        nextButton.addEventListener('click', function() {
+            // If we're at the last image (which is the clone of the first), go back to the first image
+            if (currentIndex === images.length - 1) {
+                slider.style.transition = 'none';  // Disable transition for an instant jump
+                currentIndex = 0;  // Set index to 0 (first image)
+                slider.style.transform = `translateX(0)`;  // Jump to the first image instantly
+
+                // Force a reflow/repaint to reset the transition
+                setTimeout(() => {
+                    slider.style.transition = 'transform 0.5s ease-in-out';  // Re-enable the transition
+                }, 10);
+            } else {
+                // Otherwise, move to the next image with a smooth transition
+                currentIndex++;
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
         });
 
-        document.querySelector('.next').addEventListener('click', () => {
-            moveSlider(1); // Move to the next image
+        // Move to the previous image
+        prevButton.addEventListener('click', function() {
+            if (currentIndex === 0) {
+                slider.style.transition = 'none';
+                currentIndex = images.length - 2; // Go to the second-to-last image
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                setTimeout(() => {
+                    slider.style.transition = 'transform 0.5s ease-in-out';
+                }, 10);
+            } else {
+                currentIndex--;
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            }
         });
+
     </script>
 </body>
 </html>
