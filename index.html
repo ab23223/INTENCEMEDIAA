@@ -435,7 +435,7 @@
             border-radius: 10px; /* Adds rounded corners for a softer look */
         }
 
-        @media (max-width: 768px) {
+    @media (max-width: 768px) {
         
         @import url('https://fonts.googleapis.com/css2?family=Timmana&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz&display=swap');
@@ -449,7 +449,7 @@
     
         nav ul {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             align-items: center;
             padding: 0;
             margin: 0;
@@ -461,6 +461,7 @@
     
         nav ul li a {
             font-size: 18px; /* Smaller font size */
+            padding-left: 15px;
         }
     
         img {
@@ -651,6 +652,7 @@
     
         .contact-left p {
             font-size: 14px;
+            margin-right: 0px;
             color: #aaa;
         }
     
@@ -708,34 +710,46 @@
         #info-section, #info-section1 {
             display: flex;
             flex-direction: row; /* Arrange text and image horizontally */
-            justify-content: space-between; /* Create spacing between elements */
             align-items: center; /* Align items to the same level */
-            padding: 30px;
+            padding: 10px;
             background-color: #fff;
             margin-top: 0px; /* Ensure spacing from previous section */
         }
 
         .info-text, .info-text1 {
-            max-width: 200%;
+            flex: 0 1 90%; /* Fixed flex grow, shrinkable,takes up 40% of the container*/
             text-align: left; /* Align text to the left */
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Align text vertically with the image */
+            padding-top: 300px;
+            margin-left: 0px;
+            margin-right: -50px;
+            justify-content: flex-start; /* Align text to the top */
+        }
+
+        .info-text h2, .info-text1 h2 {
+            flex: 0; /* Prevent heading from growing */
+            text-align: left;
+            padding-top: 0px;
         }
 
         .info-image, .info-image1 {
-            flex: 1;
-            text-align: right; /* Move image to the right */
-            display: flex;
-            justify-content: flex-end;
+            flex: 0 1 30%; /* Fixed flex grow, shrinkabletakes up 60% of the container */
+            text-align: right; /* Align image to the right */
+            display: block;
+            padding-left: 0; /* Remove any left padding */
         }
 
         .info-image img, .info-image1 img {
-            max-width: 80%;
-            max-height: 300px;
+            margin-top: 130px;
+            margin-left: -100px; /* Remove any left padding */
+            margin-right: 50px;
+            max-width: 100%; /* Image will stretch fully within its container */
+            max-height: 500px; /* Increase the max height of the image */
             border-radius: 10px;
-            object-fit: contain; /* Maintain aspect ratio */
+            object-fit: fill; /* Maintain aspect ratio */
         }
+        
     }
     
     </style>
